@@ -11,4 +11,4 @@ const connect = async()=>{
         console.log('error conectando a nuestra BBDD', error);
     }
 }
-module.exports = {connect}
+module.exports = {connect};
