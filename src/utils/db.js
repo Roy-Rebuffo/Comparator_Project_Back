@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const DB_URL = process.env.DB_URL;
 
 const connect = async()=>{
@@ -11,4 +12,4 @@ const connect = async()=>{
         console.log('error conectando a nuestra BBDD', error);
     }
 }
-module.exports = {connect}
+module.exports = {connect};
