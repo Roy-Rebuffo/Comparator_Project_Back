@@ -12,6 +12,28 @@ const getData = async (req, res) => {
         const scrapingPromises = urls.map(url => scrapeData(url));
 
         // Esperar a que todas las solicitudes de datos se completen
+        const scrapedDataJSON = await Promise.all(scrapingPromises);
+        
+        // Enviar los datos JSON como respuesta
+        res.json(scrapedDataJSON[0]);
+
+    } catch (error) {
+        console.error('Error al obtener los datos raspados:', error);
+        res.status(500).json({ error: 'Error al obtener los datos raspados' });
+    }
+};
+
+const getDataAlcampo = async (req, res) => {
+    try {
+        const urls = [
+            'https://www.ahorramas.com/buscador?q=desodorante&search-button=&lang=null',
+            
+        ];
+
+        // Realizar múltiples solicitudes al mismo tiempo
+        const scrapingPromises = urls.map(url => scrapeData(url));
+
+        // Esperar a que todas las solicitudes de datos se completen
         const scrapedData = await Promise.all(scrapingPromises);
         
         // Enviar los datos JSON como respuesta
@@ -23,4 +45,4 @@ const getData = async (req, res) => {
     }
 };
 
-module.exports = {getData};
+module.exports = {getData, getDataAlcampo};
