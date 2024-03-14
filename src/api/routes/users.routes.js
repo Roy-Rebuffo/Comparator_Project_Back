@@ -8,4 +8,5 @@ UserRoutes.get('/is-admin', isAdmin);
 UserRoutes.get("/confirm-user/:token", confirm);
 UserRoutes.get('/logout', [isAuth], logout);
 
+
 module.exports = UserRoutes;

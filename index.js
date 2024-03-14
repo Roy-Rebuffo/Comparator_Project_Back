@@ -10,9 +10,7 @@ const UserRoutes = require('./src/api/routes/users.routes.js')
 connect();
 
 const dotenv = require('dotenv');
-const ProductRoutes = require("./src/api/routes/products.routes.js");
-const CharacterRoutes = require('./src/api/routes/character.routes.js');
-const HouseRoutes = require("./src/api/routes/house.routes.js");
+const ScrapingRoutes = require("./src/api/routes/scraping.routes.js");
 // Ejecutamos método para usar .env
 dotenv.config();
  
@@ -43,7 +41,8 @@ app.use(
 );
 
 //Routes
-app.use('/api/users', UserRoutes)
+app.use('/api/users', UserRoutes);
+app.use('/', ScrapingRoutes);
 app.use("/public", express.static("public"));
 app.use("/api", (req, res, next) => "im alive");
 
