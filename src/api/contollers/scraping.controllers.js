@@ -46,3 +46,5 @@ const getDataAlcampo = async (req, res) => {
 };
 
 module.exports = {getData, getDataAlcampo};
+
+//no funciona el alcampo
