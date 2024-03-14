@@ -15,7 +15,7 @@
       "Mongoose",
       "Cors"
   ],
-  "author": "Enrique Herranz",
+  "author": "Enrique Herranz, Mario ,Roy Rebuffo",
   "license": "ISC",
   "dependencies": {
       "bcrypt": "^5.1.1",

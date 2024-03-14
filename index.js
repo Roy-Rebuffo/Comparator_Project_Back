@@ -44,9 +44,6 @@ app.use(
 
 //Routes
 app.use('/api/users', UserRoutes)
-app.use('/api/products', ProductRoutes)
-app.use('/api/characters', CharacterRoutes)
-app.use('/api/houses', HouseRoutes)
 app.use("/public", express.static("public"));
 app.use("/api", (req, res, next) => "im alive");
 
