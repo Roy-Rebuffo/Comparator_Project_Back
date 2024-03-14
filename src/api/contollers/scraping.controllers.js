@@ -23,7 +23,7 @@ const getData = async (req, res) => {
     }
 };
 
-const getDataAlcampo = async (req, res) => {
+const getDataAhorramas = async (req, res) => {
     try {
         const urls = [
             'https://www.ahorramas.com/buscador?q=desodorante&search-button=&lang=null',
@@ -45,6 +45,6 @@ const getDataAlcampo = async (req, res) => {
     }
 };
 
-module.exports = {getData, getDataAlcampo};
+module.exports = {getData, getDataAhorramas};
 
 //no funciona el alcampo
