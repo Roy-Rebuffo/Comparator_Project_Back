@@ -52,11 +52,11 @@ const server = app.listen(PORT, () => {
   console.log(`Server listening on port 🙈: ${PORT}`);
 });
 
-app.use((req, res, next) => {
-  setImmediate(() => {
-    next(new Error("Something went wrong"));
-  });
-});
+// app.use((req, res, next) => {
+//   setImmediate(() => {
+//     next(new Error("Something went wrong"));
+//   });
+// });
 
 app.disable('x-powered-by')
 
