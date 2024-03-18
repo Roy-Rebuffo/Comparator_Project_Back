@@ -1,7 +1,7 @@
-const scrapeData = require('../../utils/scraping/scrapeCarrefour');
+const scrapeDataCarrefour= require('../../utils/scraping/scrapeCarrefour');
 const scrapeDataWithPuppeteer = require('../../utils/scraping/scrapeAhorramas');
 
-const getData = async (req, res) => {
+const getDataCarrefour = async (req, res) => {
     try {
         const urls = [
             'https://www.carrefour.es/supermercado/perfumeria-e-higiene/bano-e-higiene-corporal/desodorantes/cat20206/c',
@@ -9,14 +9,9 @@ const getData = async (req, res) => {
             
         ];
 
-        // Realizar múltiples solicitudes al mismo tiempo
-        const scrapingPromises = urls.map(url => scrapeData(url));
-
-        // Esperar a que todas las solicitudes de datos se completen
-        const scrapedDataJSON = await Promise.all(scrapingPromises);
+        const scrapedDataJSON = await scrapeDataCarrefour(urls);
         
-        // Enviar los datos JSON como respuesta
-        res.json(scrapedDataJSON[0]);
+        res.json(scrapedDataJSON);
 
     } catch (error) {
         console.error('Error al obtener los datos raspados:', error);
@@ -42,5 +37,5 @@ const getDataAhorramas = async (req, res) => {
     }
 };
 
-module.exports = {getData, getDataAhorramas};
+module.exports = {getDataCarrefour, getDataAhorramas};
 

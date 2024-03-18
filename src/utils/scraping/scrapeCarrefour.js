@@ -1,58 +1,45 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const puppeteer = require('puppeteer');
 
-async function scrapeData(url) {
+async function scrapeDataCarrefour(urls) {
+    const browser = await puppeteer.launch();
+    const productsData = [];
+
     try {
-        const headersList = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        ];
+        await Promise.all(urls.map(async (url) => {
+            const page = await browser.newPage();
+            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+            await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-        const productsData = []; // Array para almacenar los datos de los productos
+            const products = await page.evaluate(() => {
+                const products = Array.from(document.querySelectorAll('.product-card'));
 
-        for (const userAgent of headersList) {
-            const response = await axios.get(url, {
-                headers: {
-                    'User-Agent': userAgent
-                }
+                return products.map(product => {
+                    const title = product.querySelector('.product-card__title').textContent.trim();
+                    const price = product.querySelector('.product-card__prices').textContent.trim();
+                    const image = product.querySelector('.product-card__image').getAttribute('src');
+
+                    return {
+                        title,
+                        price,
+                        image
+                    };
+                });
             });
 
-            const html = response.data;
-            const $ = cheerio.load(html);
+            productsData.push(...products);
 
-            $('.product-card').each((index, element) => {
-                const product = $(element);
-
-                // Extarer título
-                const title = product.find('.product-card__title').text().trim();
-
-                // Extarer precio
-                const price = product.find('.product-card__prices').text().trim();
-
-                // Extarer imagen
-                const image = product.find('.product-card__image').attr('src');
-
-                // Crear un objeto con los datos del producto
-                const productObj = {
-                    title: title,
-                    price: price,
-                    image: image
-                };
-                // Agregar el objeto del producto al array de datos de productos
-
-                productsData.push(productObj);
-            });
-        }
+            await page.close();
+        }));
 
         return productsData;
 
     } catch (error) {
-        console.error('Error al obtener el HTML:', error);
-        return ({ error: 'Error al obtener los datos' });
+        console.error('Error al obtener los datos con Puppeteer:', error);
+        return { error: 'Error al obtener los datos' };
+
+    } finally {
+        await browser.close();
     }
 }
 
-
-module.exports = scrapeData;
-
+module.exports = scrapeDataCarrefour;
