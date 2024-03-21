@@ -22,7 +22,8 @@ async function scrapeDataWithPuppeteer(urls) {
                     return {
                         title,
                         price,
-                        image
+                        image,
+                        supermercado: "ahorramas"
                     };
                 });
             });
