@@ -146,5 +146,42 @@ const isAdmin = async (req, res, next) => {
 }
 
 
+const getProfile = async (req, res, next) => {
+    try {
+        // Comprobamos si el usuario está autenticado
+        const userEmail =  req.body.email; 
 
-module.exports = { register, login, logout, confirm,  newPassword, isAdmin}
+        // Buscamos al usuario en la base de datos por su correo electrónico
+        const user = await User.findOne({ email: userEmail });
+
+        if (!user) {
+            // Si el usuario no se encuentra, devolvemos un mensaje de error
+            const error = new Error('Usuario no encontrado');
+            return res.status(404).json({ msg: error.message });
+        }
+
+        // Si el usuario se encuentra, devolvemos sus datos de perfil
+        return res.json(user);
+    } catch (error) {
+        // Si ocurre algún error durante la búsqueda del usuario, devolvemos un mensaje de error
+        return res.status(500).json({ msg: 'Error al obtener el perfil del usuario' });
+    }
+};
+
+const patchOne = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { name, surname, email } = req.body;
+        
+          let updatedUser = await User.findByIdAndUpdate(id, { name, surname, email }, { new: true });
+
+          return res.status(200).json(updatedUser);
+        }  
+        catch (error) {
+        return next(error);
+    }
+}
+
+
+
+module.exports = { register, login, logout, confirm,  newPassword, isAdmin, getProfile, patchOne }
