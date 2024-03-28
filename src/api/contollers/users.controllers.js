@@ -172,7 +172,7 @@ const patchOne = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { name, surname, email } = req.body;
-        
+        console.log(req.body);
           let updatedUser = await User.findByIdAndUpdate(id, { name, surname, email }, { new: true });
 
           return res.status(200).json(updatedUser);
