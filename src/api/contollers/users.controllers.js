@@ -182,6 +182,18 @@ const patchOne = async (req, res, next) => {
     }
 }
 
+const deleteOne = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        
+        const deletedUser = await User.findByIdAndDelete(id);
+
+        return res.status(200).json(deletedUser);
+    } catch (error) {
+        return next(error);
+    }
+}
 
 
-module.exports = { register, login, logout, confirm,  newPassword, isAdmin, getProfile, patchOne }
+
+module.exports = { register, login, logout, confirm,  newPassword, isAdmin, getProfile, patchOne, deleteOne }

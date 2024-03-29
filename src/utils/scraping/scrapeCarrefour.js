@@ -25,9 +25,11 @@ async function scrapeDataCarrefour(urls) {
         });
 */
         await page.goto(url, { waitUntil: 'domcontentloaded' });
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         // Espero a que cargue la página. Los elementos que necesito son dinámicos
         await page.waitForNetworkIdle();
+
 
         // Función para hacer scroll en la página
         async function scrollDown() {
