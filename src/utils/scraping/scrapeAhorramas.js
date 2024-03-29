@@ -41,7 +41,7 @@ async function scrapeDataWithPuppeteer(urls) {
                         title,
                         price,
                         image,
-                        supermarket: "ahorramas"
+                        supermarket: "Ahorramas"
                     };
                 });
             });
