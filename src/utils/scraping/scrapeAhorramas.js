@@ -4,8 +4,7 @@ const puppeteerConfig = require('../../../puppeteer.config')
 
 async function scrapeDataWithPuppeteer(urls) {
     const browser = await puppeteer.launch({
-        headless: false,
-        slowMo: 400
+        ignoreDefaultArgs: ['--disable-extensions'],
       });
     const productsData = [];
 
