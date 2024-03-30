@@ -1,4 +1,3 @@
-const nodemailer = require("nodemailer")
 const express = require("express");
 const cors = require("cors");
 // Método de config cloudinary
