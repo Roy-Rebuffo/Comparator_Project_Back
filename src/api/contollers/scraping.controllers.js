@@ -30,8 +30,7 @@ const getDataAhorramas = async (req, res) => {
 
     } catch (error) {
         console.error('Error al obtener los datos raspados con Puppeteer:', error);
-        // res.status(500).json({ error: 'Error al obtener los datos raspados' });
-        res.status(500).json(error);
+        res.status(500).json({ error: 'Error al obtener los datos raspados' });
     }
 };
 
