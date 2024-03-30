@@ -1,19 +1,8 @@
 const puppeteer = require('puppeteer');
-const puppeteerConfig = require('../../../puppeteer.config')
 
 
 async function scrapeDataWithPuppeteer(urls) {
-    const browser = await puppeteer.launch({
-        args: [
-            '--disable-gpu',
-            '--disable-dev-shm-usage',
-            '--disable-setuid-sandbox',
-            '--no-first-run',
-            '--no-sandbox',
-            '--no-zygote',
-            '--single-process',
-        ]
-      });
+    const browser = await puppeteer.launch();
     const productsData = [];
 
     try {
