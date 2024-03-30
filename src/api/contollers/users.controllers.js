@@ -2,8 +2,6 @@ const User = require('../models/users.model.js');
 const {generateToken} = require('../../utils/jwt/jwt.js');
 const {generateID} = require("../../utils/generateID/generateID.js")
 const JwtUtils = require('../../utils/jwt/jwt.js');
-const { transporter } = require('../../utils/nodemailer-config.js');
-
 
 
 const register = async (req, res, next) => {

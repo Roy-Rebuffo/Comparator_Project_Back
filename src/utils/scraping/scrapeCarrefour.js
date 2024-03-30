@@ -97,7 +97,7 @@ async function scrapeDataCarrefour(urls) {
               title,
               price,
               image,
-              supermarket: 'carrefour',
+              supermarket: 'Carrefour',
             };
           });
         });
