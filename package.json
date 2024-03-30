@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "productSeed": "node ./src/product.seeds.js",
-    "gcp-build": "node node_modules/puppeteer/install.js"
+    "productSeed": "node ./src/product.seeds.js"
   },
   "keywords": [
     "Node",
