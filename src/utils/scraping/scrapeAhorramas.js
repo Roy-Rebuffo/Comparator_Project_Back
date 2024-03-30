@@ -4,9 +4,8 @@ const puppeteerConfig = require('../../../puppeteer.config')
 
 async function scrapeDataWithPuppeteer(urls) {
     const browser = await puppeteer.launch({
-        executablePath: '/path/to/chrome', // Ruta al binario de Chrome
-        args: ['--no-sandbox', '--disable-setuid-sandbox'], // Argumentos de lanzamiento de Chrome
-        ...puppeteerConfig, // Importa la configuración de Puppeteer
+        headless: false,
+        slowMo: 400
       });
     const productsData = [];
 
